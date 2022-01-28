@@ -1,0 +1,29 @@
+- hosts: "{{ name_host }}"
+  remote_user: nchuong
+  become: yes
+  gather_facts: no
+  strategy: free
+
+  tasks:
+    - name: Update Package
+      apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+
+    - name: Install required system packages
+      apt: name={{ item }} state=latest update_cache=yes
+      loop: [ 'realmd', 'libnss-sss', 'libpam-sss', 'sssd', 'sssd-tools', 'adcli', 'samba-common-bin' , 'oddjob', 'oddjob-mkhomedir', 'packagekit']
+
+
+    - name: Copy Bash file to Remote Machine
+      copy:
+        src=scriptJoinAD.sh
+        dest=~/scriptJoinAD.sh
+        mode=0751
+    
+
+    - name: Excute Script Join Domain on Remote Machine
+      become: true
+      script: scriptJoinAD.sh
+
+    - name: Clean-up
+      command: apt clean
+      become: true
