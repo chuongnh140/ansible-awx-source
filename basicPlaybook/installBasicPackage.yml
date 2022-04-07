@@ -1,0 +1,16 @@
+---
+- hosts: "{{ hostname }}" 
+  remote_user: "{{ username }}"
+  become: yes
+
+  tasks:
+    - name: Update Package
+      apt: update_cache=yes cache_valid_time=3600
+
+    - name: Install Favorite Packages
+      apt: name={{ item }} state=latest
+      loop: [ 'vim', 'htop']
+
+    - name: Clean-up
+      command: apt clean
+      become: true
