@@ -1,0 +1,10 @@
+---
+- hosts: "{{ hostname  }}"
+  remote_user: "{{ username  }}"
+  become: True
+  tasks:
+    - name: Install the version of package nginx
+      apt: 
+        name: "{{ package_version  }}"
+           
+

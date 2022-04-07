@@ -1,0 +1,9 @@
+---
+- hosts: "{{ hostname  }}"
+  remote_user: "{{ username  }}"
+  become: True
+  tasks:
+#Upgrade Package Server
+  - name: Upgrade all apt packages
+    apt: upgrade=dist 
+

@@ -1,0 +1,10 @@
+---
+- hosts: "{{ hostname  }}"
+  remote_user: "{{ username  }}"
+  become: True
+  tasks:
+#Reboot Linux
+  - name: Reboot the machine (Wait for 1 min)
+    reboot:
+      reboot_timeout: 70
+
