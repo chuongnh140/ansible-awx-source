@@ -3,7 +3,7 @@
   remote_user: "{{ username  }}"
   become: True
   tasks:
-    - name: Install the version of package nginx
+    - name: Update version package
       apt: 
         name: "{{ package_version  }}"
            
