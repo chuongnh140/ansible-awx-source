@@ -1,0 +1,12 @@
+---
+- hosts: "{{ hostname  }}"
+  remote_user: "{{ username  }}"
+  become: True
+  tasks:
+#Reboot Linux
+  - name: Shutdown Linux Server
+    community.general.shutdown:
+      delay: 5
+      msg: "Shutting down from Ansible"
+
+
